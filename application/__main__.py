@@ -1,14 +1,15 @@
 import uvicorn
 
-from . import settings
-from .app import create_app
+from application import settings
+from application.app import create_app
+
+app = create_app()
 
 if __name__ == "__main__":
-    app = create_app()
-
     uvicorn.run(
-        app,
+        "application.__main__:app",
         host=settings.deploy.HOST,
         port=settings.deploy.PORT,
         debug=settings.deploy.DEBUG,
+        reload=True,
     )
