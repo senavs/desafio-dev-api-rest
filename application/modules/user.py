@@ -1,8 +1,7 @@
 from datetime import datetime
 
-from fastapi import HTTPException
-
 from ..database.client import DatabaseClient
+from ..error.user import UserAlreadyRegisteredException, UserNotFoundException
 from ..models.user import UserModel, UserTable
 
 
@@ -12,7 +11,7 @@ def search_user(id: int = None, *, connection: DatabaseClient = None) -> UserMod
     with DatabaseClient(connection=connection) as conn:
         user = conn.query(UserTable).get(id)
         if not user:
-            raise HTTPException(404, "user not found")
+            raise UserNotFoundException
 
         user_model = UserModel.from_orm(user)
     return user_model
@@ -23,7 +22,7 @@ def create_user(name: str, cpf: str, birthday: datetime) -> UserModel:
 
     with DatabaseClient() as conn:
         if conn.query(UserTable).filter(UserTable.CPF == cpf).first():
-            raise HTTPException(400, "user already registered")
+            raise UserAlreadyRegisteredException
 
         user = UserTable(NOME=name, CPF=cpf, DATA_NASCIMENTO=birthday)
         user.insert(conn)
