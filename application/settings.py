@@ -6,7 +6,7 @@ class SettingsAddsOn:
     def __getattr__(self, name: str):
         """Raise undefined settings during runtime instead of startup"""
 
-        if isinstance(getattr(self, name, None), Undefined):
+        if issubclass(getattr(self, name, None), Undefined):
             raise RuntimeError(f"you are trying to access an undefined setting: {name}")
         super().__getattribute__(name)
 
@@ -14,6 +14,7 @@ class SettingsAddsOn:
 class DeploySettings(BaseSettings, SettingsAddsOn):
     HOST: str = "0.0.0.0"
     PORT: int = 8080
+    DEBUG: bool = True
 
 
 class ApplicationSettings(BaseSettings, SettingsAddsOn):
@@ -21,5 +22,11 @@ class ApplicationSettings(BaseSettings, SettingsAddsOn):
     DESCRIPTION: str = "DOCK Python API challenge"
 
 
+class DatabaseSettings(BaseSettings, SettingsAddsOn):
+    DATABASE_URI: str = Undefined
+    DESCRIPTION: str = "DOCK Python API challenge"
+
+
 deploy = DeploySettings()
 application = ApplicationSettings()
+database = DatabaseSettings()

@@ -10,4 +10,5 @@ if __name__ == "__main__":
         "__main__:app",
         host=settings.deploy.HOST,
         port=settings.deploy.PORT,
+        debug=settings.deploy.DEBUG,
     )
