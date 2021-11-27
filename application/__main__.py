@@ -7,7 +7,7 @@ if __name__ == "__main__":
     app = create_app()
 
     uvicorn.run(
-        "__main__:app",
+        app,
         host=settings.deploy.HOST,
         port=settings.deploy.PORT,
         debug=settings.deploy.DEBUG,
