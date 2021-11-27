@@ -15,7 +15,7 @@ class AccountTable(DeclarativeBase, TableBaseModel):
 
     ID_CONTA = Column(INTEGER, autoincrement=True, nullable=False, primary_key=True, unique=True)
     ID_PESSOA = Column(INTEGER, ForeignKey("PESSOA.ID_PESSOA", ondelete="CASCADE"), nullable=False)
-    SALDO = Column(DECIMAL(2), nullable=False, default="0", server_default="0")
+    SALDO = Column(DECIMAL(2), nullable=False, default="0")
     ATIVO = Column(BOOLEAN, nullable=False, default=True)
     ID_TIPO_CONTA = Column(
         INTEGER, ForeignKey("TIPO_CONTA.ID_TIPO_CONTA", ondelete="CASCADE"), nullable=False
@@ -27,9 +27,12 @@ class AccountTable(DeclarativeBase, TableBaseModel):
 
 
 class AccountModel(BaseModel):
-    id_conta: int = Field(alias="ID_CONTA")
-    id_pessoa: int = Field(alias="ID_PESSOA")
-    saldo: Decimal = Field(alias="SALDO")
-    ativo: bool = Field(alias="ATIVO")
-    id_tipo_conta: int = Field(alias="ID_TIPO_CONTA")
-    data_criacao: datetime = Field(alias="DATA_CRIACAO")
+    id_account: int = Field(alias="ID_CONTA")
+    id_user: int = Field(alias="ID_PESSOA")
+    amount: Decimal = Field(alias="SALDO")
+    active: bool = Field(alias="ATIVO")
+    id_account_type: int = Field(alias="ID_TIPO_CONTA")
+    create_at: datetime = Field(alias="DATA_CRIACAO")
+
+    class Config:
+        orm_mode = True
