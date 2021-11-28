@@ -1,8 +1,10 @@
 from datetime import datetime
 from decimal import Decimal
+from typing import Union
 
 from pydantic import BaseModel, Field
 
+from application.models.account import AccountModel
 from application.routes.payloads import Payload
 
 
@@ -26,7 +28,7 @@ class SearchAccountResponse(AccountPayload):
 class ListAccountResponse(BaseModel):
     """Response model to endpoint GET /accounts/user/{id}"""
 
-    accounts: list[AccountPayload]
+    accounts: list[Union[AccountPayload, AccountModel]]
 
 
 class CreateAccountRequest(BaseModel):

@@ -43,4 +43,4 @@ def _deactivate_account(id: int) -> bool:
 @router.get("/user/{id}", summary="List all user accounts", response_model=ListAccountResponse)
 def _list_accounts(id: int) -> ListAccountResponse:
     accounts = list_user_accounts(id)
-    return ListAccountResponse(accounts=accounts)  # noqa
+    return ListAccountResponse(accounts=accounts)
