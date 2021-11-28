@@ -9,6 +9,15 @@ services:
     ports:
       - "3306:3306"
 
+  myadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - database
+
   application:
     build:
       context: application
