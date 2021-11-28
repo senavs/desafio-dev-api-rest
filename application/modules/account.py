@@ -85,3 +85,10 @@ def update_account_status(id_account: int, active: bool) -> bool:
         conn.commit()
 
     return was_update
+
+
+def update_account_balance(id_account: int, new_value: Decimal, *, connection: DatabaseClient):
+    """Update account balance"""
+
+    connection.query(AccountTable).filter(AccountTable.ID_CONTA == id_account).update({"SALDO": new_value})
+    connection.commit()

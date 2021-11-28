@@ -24,7 +24,10 @@ class TransactionTable(DeclarativeBase, TableBaseModel):
 
 
 class TransactionModel(BaseModel):
-    id_transacao: int = Field(alias="ID_TRANSACAO")
-    id_conta: int = Field(alias="ID_CONTA")
-    valor: Decimal = Field(alias="VALOR")
-    data_criacao: datetime = Field(alias="DATA_CRIACAO")
+    id_transaction: int = Field(alias="ID_TRANSACAO")
+    id_account: int = Field(alias="ID_CONTA")
+    value: Decimal = Field(alias="VALOR")
+    create_at: datetime = Field(alias="DATA_CRIACAO")
+
+    class Config:
+        orm_mode = True

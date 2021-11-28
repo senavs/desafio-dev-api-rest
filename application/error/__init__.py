@@ -7,8 +7,8 @@ class ApplicationException(HTTPException):
 
     status_code: int
 
-    def __init__(self):
-        super().__init__(self.status_code, self.__class__.__doc__ or "")
+    def __init__(self, custom_message: str = None):
+        super().__init__(self.status_code, self.__class__.__doc__ or custom_message or "")
 
 
 class BadRequestException(ApplicationException):
