@@ -35,6 +35,11 @@ def _update_account(id: int, body: UpdateAccountRequest) -> bool:
     return update_account_limit(id, body.limit)
 
 
+@router.post("/{id}", summary="Activate account", response_model=bool)
+def _activate_account(id: int) -> bool:
+    return update_account_status(id, True)
+
+
 @router.delete("/{id}", summary="Deactivate account", response_model=bool)
 def _deactivate_account(id: int) -> bool:
     return update_account_status(id, False)
