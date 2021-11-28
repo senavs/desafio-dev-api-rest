@@ -8,3 +8,14 @@ services:
       MYSQL_ROOT_PASSWORD: "foo-bar"
     ports:
       - "3306:3306"
+
+  application:
+    build:
+      context: application
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URI: "mysql+mysqlconnector://APPLICATION_USER:application-user-password@database:3306/DOCK"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
