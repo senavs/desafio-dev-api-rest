@@ -24,7 +24,6 @@ class ApplicationSettings(BaseSettings, SettingsAddsOn):
 
 class DatabaseSettings(BaseSettings, SettingsAddsOn):
     DATABASE_URI: str = "mysql+mysqlconnector://APPLICATION_USER:application-user-password@0.0.0.0:3306/DOCK"
-    DESCRIPTION: str = "DOCK Python API challenge"
 
 
 deploy = DeploySettings()

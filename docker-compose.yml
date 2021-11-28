@@ -8,3 +8,23 @@ services:
       MYSQL_ROOT_PASSWORD: "foo-bar"
     ports:
       - "3306:3306"
+
+  myadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - database
+
+  application:
+    build:
+      context: application
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URI: "mysql+mysqlconnector://APPLICATION_USER:application-user-password@database:3306/DOCK"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
