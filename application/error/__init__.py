@@ -8,13 +8,7 @@ class ApplicationException(HTTPException):
     status_code: int
 
     def __init__(self):
-        super().__init__(self.status_code, self.detail)
-
-    @property
-    def detail(self) -> str:
-        """Class doc string is the error detail"""
-
-        return self.__class__.__doc__ or ""
+        super().__init__(self.status_code, self.__class__.__doc__ or "")
 
 
 class BadRequestException(ApplicationException):
